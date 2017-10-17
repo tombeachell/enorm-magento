@@ -1,0 +1,206 @@
+@mixin background-image-svg($name) {
+  background-image: url('../images/#{$name}.png');
+  background-image: url('../images/#{$name}.svg');
+}
+
+@mixin transition() {
+  transition: all $animation-duration;
+}
+
+@mixin rotate($deg: 90) {
+  $sDeg: #{$deg}deg;
+  transform: rotate($sDeg);
+  transition-property: transform;
+  @include transition(); // Add this also to target div
+}
+
+@mixin responsive-vw($properties, $min-value, $max-value) {
+  @each $property in $properties {
+    #{$property}: $min-value;
+  }
+
+  @media screen and (min-width: $min-width) {
+    @each $property in $properties {
+      #{$property}: calc(#{$min-value} + #{strip-unit($max-value - $min-value)} * (100vw - #{$min-width}) / #{strip-unit($max-width - $min-width)});
+    }
+  }
+
+  @media screen and (min-width: $max-width) {
+    @each $property in $properties {
+      #{$property}: $max-value;
+    }
+  }
+}
+
+@function strip-unit($value) {
+  @return $value / ($value * 0 + 1);
+}
+
+/* --- Grid --- */
+@mixin grid-breakpoint($prefix) {
+  @include grid-media(map-get($neat-breakpoint-grid, $prefix)) {
+    @for $i from 1 through $grid-columns {
+      .grid__col--#{$prefix}-#{$i} {
+        @include grid-column($i);
+
+        &.grid__col--no-margin {
+          width: (100% / $grid-columns) * $i;
+        }
+      }
+    }
+  }
+}
+
+/* --- Colors --- */
+$colors: (
+  black: #000000,
+  white: #FFFFFF
+);
+
+$color-map: ();
+
+@each $key, $value in $colors {
+  $color-map: map-merge($color-map, ($key: (
+    base: $value,
+    light: lighten($value, $color-shade-percentage),
+    dark: darken($value, $color-shade-percentage)
+  )));
+}
+
+// @function color($key, $value: 'base') {
+//   @return map-get(map-get($color-map, $key), $value);
+// }
+
+/* --- Spacing --- */
+@mixin spacing-sizes($box) {
+  &--small {
+    #{$box}: $spacing / 2;
+  }
+
+  &--medium {
+    #{$box}: $spacing * 2;
+  }
+
+  &--large {
+    #{$box}: $spacing * 3;
+  }
+}
+
+@mixin spacing($box) {
+
+  &-top {
+    #{$box}-top: $spacing;
+    @include spacing-sizes(#{$box}-top);
+
+    @each $key, $value in $grid-breakpoints {
+      @include grid-media(map-get($neat-breakpoint-grid, $key)) {
+        &__#{$key} {
+          #{$box}-top: $spacing;
+          @include spacing-sizes(#{$box}-top);
+        }
+      }
+    }
+  }
+
+  &-bottom {
+    #{$box}-bottom: $spacing;
+    @include spacing-sizes(#{$box}-bottom);
+
+    @each $key, $value in $grid-breakpoints {
+      @include grid-media(map-get($neat-breakpoint-grid, $key)) {
+        &__#{$key} {
+          #{$box}-bottom: $spacing;
+          @include spacing-sizes(#{$box}-bottom);
+        }
+      }
+    }
+  }
+
+  &-vertical {
+    #{$box}-top: $spacing;
+    #{$box}-bottom: $spacing;
+
+    &--small {
+      #{$box}-top: $spacing / 2;
+      #{$box}-bottom: $spacing / 2;
+    }
+
+    &--medium {
+      #{$box}-top: $spacing * 2;
+      #{$box}-bottom: $spacing * 2;
+    }
+
+    &--large {
+      #{$box}-top: $spacing * 3;
+      #{$box}-bottom: $spacing * 3;
+    }
+
+    @each $key, $value in $grid-breakpoints {
+      @include grid-media(map-get($neat-breakpoint-grid, $key)) {
+        &__#{$key} {
+          #{$box}-top: $spacing;
+          #{$box}-bottom: $spacing;
+
+          &--small {
+            #{$box}-top: $spacing / 2;
+            #{$box}-bottom: $spacing / 2;
+          }
+
+          &--medium {
+            #{$box}-top: $spacing * 2;
+            #{$box}-bottom: $spacing * 2;
+          }
+
+          &--large {
+            #{$box}-top: $spacing * 3;
+            #{$box}-bottom: $spacing * 3;
+          }
+        }
+      }
+    }
+  }
+
+  &-horizontal {
+    #{$box}-left: $spacing;
+    #{$box}-right: $spacing;
+
+    &--small {
+      #{$box}-left: $spacing / 2;
+      #{$box}-right: $spacing / 2;
+    }
+
+    &--medium {
+      #{$box}-left: $spacing * 2;
+      #{$box}-right: $spacing * 2;
+    }
+
+    &--large {
+      #{$box}-left: $spacing * 3;
+      #{$box}-right: $spacing * 3;
+    }
+
+    @each $key, $value in $grid-breakpoints {
+      @include grid-media(map-get($neat-breakpoint-grid, $key)) {
+        &__#{$key} {
+          #{$box}-left: $spacing;
+          #{$box}-right: $spacing;
+
+          &--small {
+            #{$box}-left: $spacing / 2;
+            #{$box}-right: $spacing / 2;
+          }
+
+          &--medium {
+            #{$box}-left: $spacing * 2;
+            #{$box}-right: $spacing * 2;
+          }
+
+          &--large {
+            #{$box}-left: $spacing * 3;
+            #{$box}-right: $spacing * 3;
+          }
+        }
+      }
+    }
+  }
+}

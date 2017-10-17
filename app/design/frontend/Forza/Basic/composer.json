@@ -1,0 +1,15 @@
+{
+    "name": "forza/basic",
+    "description": "Forza Digital Magento 2 basic theme based on blank",
+    "version": "1.0.1",
+    "license": "MIT",
+    "type": "magento2-theme",
+    "require": {
+        "magento/framework": "101.0.*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ]
+    }
+}

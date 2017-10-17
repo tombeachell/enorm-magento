@@ -1,0 +1,113 @@
+$gutter: 6px;
+$min-width: 640px;
+$max-width: 100%;
+$columns: 12;
+
+$grid-breakpoints: (
+  lg: $max-width,
+  md: 996px,
+  sm: 768px,
+  xs: $min-width
+);
+
+
+$neat-grid: (
+  columns: $columns,
+  gutter: $gutter
+);
+
+$neat-breakpoint-grid: ();
+
+@each $key, $value in $grid-breakpoints {
+  $neat-breakpoint-grid: map-merge($neat-breakpoint-grid, ($key: (
+    columns: $columns,
+    gutter: $gutter,
+    media: 'screen and (max-width: #{$value})'
+  )));
+}
+
+$lg: map-get($neat-breakpoint-grid, lg);
+$md: map-get($neat-breakpoint-grid, md);
+$sm: map-get($neat-breakpoint-grid, sm);
+$xs: map-get($neat-breakpoint-grid, xs);
+
+$grid-columns: map-get($neat-grid, columns);
+
+.grid {
+
+  &__container {
+    position: relative;
+    max-width: $max-width;
+    margin: 0 auto;
+
+    &--visual {
+      @include grid-visual();
+    }
+  }
+
+  &__row {
+    @include grid-container;
+  }
+
+  &__col {
+    @for $i from 1 through $grid-columns {
+      &--#{$i} {
+        @include grid-column($i);
+        box-sizing: border-box;
+
+        &--fw {
+          max-width: 1240px;
+          padding: 0 20px 0 20px;
+          margin-left: auto;
+          margin-right: auto;
+        }
+
+        &.grid__col--no-margin {
+          width: (100% / $grid-columns) * $i !important;
+          margin-left: 0;
+        }
+      }
+    }
+  }
+
+  &__push {
+    @for $i from 1 through $grid-columns {
+      &--#{$i} {
+        @include grid-push($i);
+
+        &.grid__col--no-margin {
+          margin-left: (100% / $grid-columns) * $i;
+        }
+      }
+    }
+  }
+
+  &__collapse {
+    @include grid-collapse();
+    float: left;
+  }
+
+  &__margin {
+    margin: 0 !important;
+
+    &--l3 {
+      margin-left: 3px;
+    }
+
+    &--r6 {
+      margin-right: 6px
+    }
+
+    &--b20 {
+      margin-bottom: 20px;
+    }
+
+    &--b6 {
+      margin-bottom: 6px;
+    }
+  }
+}
+
+@each $key, $value in $grid-breakpoints {
+  @include grid-breakpoint($key);
+}
