@@ -13,7 +13,7 @@
         "honl/magento2-nl-nl": "^1.1",
         "mollie/magento2": "^1.1",
         "mageplaza/module-smtp": "^1.0",
-        "mage2pro/currency-format": "*"
+        "mage2pro/currency-format": "*",
         "php": ">=7.1.0"
     },
     "require-dev": {
