@@ -2,11 +2,11 @@
     "name": "tombeachell/forza-magento",
     "description": "Forza Digital Standard Magento 2",
     "type": "project",
-    "version": "1.0.0",
     "license": [
         "OSL-3.0",
         "AFL-3.0"
     ],
+    "minimum-stability": "dev",
     "require": {
         "magento/product-community-edition": "2.2.0",
         "composer/composer": "@alpha",
@@ -14,6 +14,7 @@
         "mollie/magento2": "^1.1",
         "mageplaza/module-smtp": "^1.0",
         "mage2pro/currency-format": "*"
+        "php": ">=7.1.0"
     },
     "require-dev": {
         "phpunit/phpunit": "~6.2.0",
@@ -56,4 +57,5 @@
     "extra": {
         "magento-force": "override"
     }
+    
 }
