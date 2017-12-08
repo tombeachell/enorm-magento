@@ -2,9 +2,7 @@
     "name": "tombeachell/forza-magento",
     "description": "Forza Digital Standard Magento 2",
     "version": "1.0.0",
-    "license": "MIT",
     "require": {
-        "tombeachell/forza-magento": "1.0.0",
         "magento/product-community-edition": "2.2.0",
         "composer/composer": "@alpha",
         "honl/magento2-nl-nl": "^1.1",
