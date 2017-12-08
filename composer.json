@@ -1,6 +1,6 @@
 {
     "name": "tombeachell/forza-magento",
-    "description": "Forza Digital Standard Magento 2"
+    "description": "Forza Digital Standard Magento 2",
     "version": "1.0.0",
     "license": "MIT",
     "require": {
