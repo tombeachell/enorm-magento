@@ -1,10 +1,8 @@
 {
     "name": "tombeachell/forza-magento",
-    "description": "Forza Digital Standard Magento 2",
-    "type": "project",
+    "description": "Forza Digital Standard Magento 2"
     "version": "1.0.0",
-    "minimum-stability": "dev",
-    "prefer-stable": "true",
+    "license": "MIT",
     "require": {
         "magento/product-community-edition": "2.2.0",
         "composer/composer": "@alpha",
